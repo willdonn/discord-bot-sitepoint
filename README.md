@@ -1,13 +1,17 @@
 A Discord bot created to get prices from Steam. 
 
-## Useage
+## Usage
 !price title of game [--3]
-    - !price - command to retrieve the game price
-    - title of game - the game to search for on steam
-    - --3 - optional argument to get more than one search result, 3 results will be returned if they are found in this case
+    <ul>
+        <li>!price - command to retrieve the game price</li>
+        <li>title of game - the game to search for on steam</li>
+        <li>--3 - optional argument to get more than one search result, 3 results will be returned if they are found in this case</li>
+    </ul>
 !score title of game
-    - !score - command to retrieve the overall score/ review of the game
-    - title of game - the game to search for on steam
+    <ul>
+        <li>!score - command to retrieve the overall score/ review of the game</li>
+        <li>title of game - the game to search for on steam</li>
+    </ul>
 
 index.js contains the code to retrieve prices from steam, it is hard coded to return english results in canadian dollars, to change the language or currency, change arguments in the provider.search function on lines 22 and 29
 
