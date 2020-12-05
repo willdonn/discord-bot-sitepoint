@@ -1,7 +1,10 @@
 require('dotenv').config();
 const Discord = require('discord.js');
+const steam = require('steam-provider');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
+
+const provider = new steam.SteamProvider();
 
 bot.login(TOKEN);
 
@@ -10,16 +13,21 @@ bot.on('ready', () => {
 });
 
 bot.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('pong');
-    msg.channel.send('pong');
-
-  } else if (msg.content.startsWith('!kick')) {
-    if (msg.mentions.users.size) {
-      const taggedUser = msg.mentions.users.first();
-      msg.channel.send(`You wanted to kick: ${taggedUser.username}`);
+  if(msg.content.startsWith('!price')) {
+    const arg = msg.content.slice(5).trim();
+    const numRes = arg.includes("--") ? parseInt(arg.substring(arg.indexOf("--")+2)) : 1;
+    if (isNaN(numRes)) {
+      msg.reply("Must use a numerical argument!");
     } else {
-      msg.reply('Please tag a valid user!');
+      provider.search(arg, numRes, "en", "cad").then(result => {
+        msg.reply(result.map(x => x.name+", Price: "+(x.price.length > 0 ? x.price : x.priceWithDiscount)));
+        console.log(result);
+      });
     }
+  } else if (msg.content.startsWith('!score')) {
+    const arg = msg.content.slice(5).trim();
+    provider.search(arg, 1, "en", "cad").then(result => {
+      msg.reply(result.map(x => x.name+", Score: "+x.score));
+    });
   }
 });

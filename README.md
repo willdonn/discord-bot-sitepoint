@@ -1,6 +1,17 @@
-# How to Build Your First Discord Bot with Node.js
+A Discord bot created to get prices from Steam. 
 
-Michiel Mulders shows you how to install and set up a new Discord bot, which is made easier thanks to the API offered by the Discord.js package.
+## Useage
+!price title of game [--3]
+    - !price - command to retrieve the game price
+    - title of game - the game to search for on steam
+    - --3 - optional argument to get more than one search result, 3 results will be returned if they are found in this case
+!score title of game
+    - !score - command to retrieve the overall score/ review of the game
+    - title of game - the game to search for on steam
+
+index.js contains the code to retrieve prices from steam, it is hard coded to return english results in canadian dollars, to change the language or currency, change arguments in the provider.search function on lines 22 and 29
+
+## Created from the following tutorial:
 
 Link to article on SitePoint: [https://www.sitepoint.com/discord-bot-node-js/](https://www.sitepoint.com/discord-bot-node-js/)
 
